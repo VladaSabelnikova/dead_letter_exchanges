@@ -18,7 +18,7 @@ class RabbitSettings(BaseSettings):
     exchange_retry: str
     default_message_ttl_ms: int
     max_retry_count: int
-    kill_signal: str
+    kill_signal: bytes
     queue_convert_tasks: str
     queue_progress_bar: str
 
