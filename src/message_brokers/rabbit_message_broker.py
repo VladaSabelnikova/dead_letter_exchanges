@@ -1,7 +1,7 @@
 """
 Модуль содержит класс с брокером сообщений.
 
-Архитектура Rabbit такая:
+Архитектура Rabbit следующая:
 
 Есть очередь, в которую попадают все вновь приходящие message — queue_waiting_depart.
 Есть обменник для этой очереди — exchange_incoming.
@@ -10,7 +10,7 @@
 В обменнике exchange_sorter message перенаправляются в очереди с одноименными названиями routing_key.
 Иными словами сортировка такая: routing_key == queue_name
 
-В этой очереди message дожидается пока её схватит consumer.
+В этой очереди message дожидается пока её прочитает consumer.
 Если consumer что-то не смог сделать с сообщением
 (иными словами не сказал basic_ack) — message отправляется в обменник exchange_retry,
 а от туда сразу в очередь queue_waiting_retry.
@@ -73,7 +73,7 @@ class RabbitMessageBroker(AbstractMessageBroker):
                 async for message in iterator:
 
                     # Выключаем consumer и удаляем одноразовую очередь по kill_signal.
-                    if message.body.decode() == config.rabbit.kill_signal:
+                    if message.body == config.rabbit.kill_signal:
                         await self._kill_alive_queue(queue_name=queue_name, channel=channel)
                         break
 
@@ -185,7 +185,7 @@ class RabbitMessageBroker(AbstractMessageBroker):
         """
         Внутренний метод для создания «живой» очереди и привязки её к сортирующему обменнику.
 
-        Под живой очередью мы понимаем очередь, из которой consumer будет выкусывать данные.
+        Под живой очередью мы понимаем очередь, из которой consumer будет читать данные.
 
         Args:
             queue_name: название очереди
