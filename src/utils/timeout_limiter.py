@@ -5,7 +5,7 @@ from functools import wraps
 from logging import getLogger
 from typing import Union, Callable, Any
 
-from utils.custom_exceptions import ConnectionTimeoutError
+from src.utils.custom_exceptions import ConnectionTimeoutError
 
 
 def timeout_limiter(

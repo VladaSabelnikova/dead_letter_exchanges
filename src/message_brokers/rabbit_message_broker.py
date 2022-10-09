@@ -30,9 +30,9 @@ from aio_pika.abc import AbstractRobustConnection, AbstractChannel, AbstractQueu
 from pamqp.commands import Basic
 from pydantic import SecretStr
 
-from config.settings import config
-from message_brokers.abstract_classes import AbstractMessageBroker
-from utils.timeout_limiter import timeout_limiter
+from src.config.settings import config
+from src.message_brokers.abstract_classes import AbstractMessageBroker
+from src.utils.timeout_limiter import timeout_limiter
 
 
 class RabbitMessageBroker(AbstractMessageBroker):
