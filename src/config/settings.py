@@ -21,6 +21,7 @@ class RabbitSettings(BaseSettings):
     kill_signal: bytes
     queue_convert_tasks: str
     queue_progress_bar: str
+    max_timeout: int
 
     class Config:
         """

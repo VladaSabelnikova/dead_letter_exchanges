@@ -54,6 +54,7 @@ class RabbitMessageBroker(AbstractMessageBroker):
         self.login = login
         self.password = password
 
+    @timeout_limiter(max_timeout=config.rabbit.max_timeout, logger_name='message_brokers.consume')
     async def consume(self, queue_name: str, callback: Callable) -> None:
         """
         Метод обрабатывает сообщения функцией callback из очереди с названием queue_name.
@@ -79,7 +80,7 @@ class RabbitMessageBroker(AbstractMessageBroker):
 
                     running_loop.create_task(callback(message))
 
-    @timeout_limiter(max_timeout=10, logger_name='message_brokers.publish')
+    @timeout_limiter(max_timeout=config.rabbit.max_timeout, logger_name='message_brokers.publish')
     async def publish(
         self,
         message_body: bytes,
@@ -120,6 +121,7 @@ class RabbitMessageBroker(AbstractMessageBroker):
             result = await exchange_incoming.publish(message=message, routing_key=queue_name)
             return isinstance(result, Basic.Ack)
 
+    @timeout_limiter(max_timeout=config.rabbit.max_timeout, logger_name='message_brokers.idempotency_startup')
     async def idempotency_startup(self) -> None:
         """
         Метод для конфигурации базовой архитектуры RabbitMQ.
