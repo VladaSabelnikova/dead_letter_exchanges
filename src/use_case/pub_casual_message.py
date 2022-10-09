@@ -1,7 +1,6 @@
-"""Модуль содержит демо функцию публикующую сообщение в очередь."""
+"""Модуль содержит демо функцию, публикующую обычные сообщения."""
 import asyncio
 
-from config.settings import config
 from message_brokers.rabbit_message_broker import message_broker_factory
 
 
@@ -21,12 +20,6 @@ async def publisher() -> None:
             queue_name=queue_name,
             message_headers={'x-request-id': f'request-id-{i}'}
         )
-
-    # Публикуем kill-signal, чтобы удалить очередь и закрыть consumer-а.
-    await message_broker_factory.publish(
-        message_body=config.rabbit.kill_signal,
-        queue_name=queue_name
-    )
 
 
 if __name__ == '__main__':

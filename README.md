@@ -23,7 +23,9 @@
 
 После этого можно запустить демонстрационные файлы:
 * src/use_case/consumer.py (демонстрирует работу consumer-а)
-* src/use_case/publisher.py (демонстрирует работу publisher-а)
+* src/use_case/pub_casual_message.py (демонстрирует публикацию обычных сообщений)
+* src/use_case/pub_delayed_message.py (демонстрирует публикацию отложенных сообщений)
+* src/use_case/pub_kill_signal_message.py (демонстрирует публикацию kill-signal)
 
 
 ### Планы по доработке:
