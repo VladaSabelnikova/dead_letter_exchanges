@@ -58,6 +58,7 @@ class RabbitMessageBroker(AbstractMessageBroker):
     async def consume(self, queue_name: str, callback: Callable) -> None:
         """
         Метод обрабатывает сообщения функцией callback из очереди с названием queue_name.
+        Callback-и выполняются асинхронно (быстро, параллельно, для I/O задач).
 
         Args:
             queue_name: название очереди, из которой хотим получить данные
