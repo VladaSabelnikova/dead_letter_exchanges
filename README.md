@@ -1,4 +1,4 @@
-## Асинхронный интерфейс для RabbitMQ with DLX
+## Асинхронный интерфейс для RabbitMQ with DLX.
 
 
 ### DLX use cases:
